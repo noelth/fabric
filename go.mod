@@ -1,4 +1,4 @@
-module github.com/danielmiessler/fabric
+module github.com/noelth/fabric
 
 go 1.23.4
 
