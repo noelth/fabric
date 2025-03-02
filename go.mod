@@ -6,6 +6,7 @@ require (
 	github.com/anaskhan96/soup v1.2.5
 	github.com/anthropics/anthropic-sdk-go v0.2.0-alpha.11
 	github.com/atotto/clipboard v0.1.4
+	github.com/danielmiessler/fabric v1.4.147
 	github.com/gabriel-vasile/mimetype v1.4.8
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-git/go-git/v5 v5.13.2
@@ -41,7 +42,6 @@ require (
 	github.com/bytedance/sonic/loader v0.2.3 // indirect
 	github.com/cloudflare/circl v1.6.0 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
-	github.com/cloudwego/iasm v0.2.0 // indirect
 	github.com/cyphar/filepath-securejoin v0.4.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect

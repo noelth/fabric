@@ -6,36 +6,34 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"regexp"
 
 	"github.com/noelth/fabric/plugins"
 )
 
-// SearXNGSearchResult represents a single search result from SearXNG
+// Structs for JSON response from SearXNG
 type SearXNGSearchResult struct {
 	Title   string `json:"title"`
 	URL     string `json:"url"`
 	Content string `json:"content"`
 }
 
-// SearXNGResponse represents the full API response
 type SearXNGResponse struct {
-	Query   string                `json:"query"`
+	Query   string               `json:"query"`
 	Results []SearXNGSearchResult `json:"results"`
 }
 
-// Client implements the Fabric Tool interface
-type Client struct {
+// SearXNG represents the tool structure (similar to YouTube tool)
+type SearXNG struct {
 	*plugins.PluginBase
+	normalizeRegex *regexp.Regexp
 }
 
-// Ensure Client implements the Tool interface
-var _ plugins.Tool = (*Client)(nil)
-
-// NewClient initializes the tool
-func NewClient() (ret *Client) {
+// NewSearXNG initializes the tool (following YouTube's `NewYouTube`)
+func NewSearXNG() (ret *SearXNG) {
 	label := "SearXNG"
 
-	ret = &Client{
+	ret = &SearXNG{
 		PluginBase: &plugins.PluginBase{
 			Name:             label,
 			SetupDescription: "SearXNG Service - to query and retrieve search results",
@@ -43,16 +41,18 @@ func NewClient() (ret *Client) {
 		},
 	}
 
+	ret.normalizeRegex = regexp.MustCompile(`[^a-zA-Z0-9]+`)
 	return
 }
 
-// Run executes the tool (Fabric calls this function when invoking the tool)
-func (sc *Client) Run(input string) (ret string, err error) {
-	searxngURL := fmt.Sprintf("http://localhost:8080/search?q=%s&format=json", url.QueryEscape(input))
-	return sc.request(searxngURL)
+// QuerySearXNG performs a search query using your local SearXNG instance
+func (s *SearXNG) QuerySearXNG(query string) (ret string, err error) {
+	searxngURL := fmt.Sprintf("http://localhost:3002/search?q=%s&format=json", url.QueryEscape(query))
+	return s.request(searxngURL)
 }
 
-func (sc *Client) request(requestURL string) (ret string, err error) {
+// request sends an HTTP GET request to SearXNG and parses the response
+func (s *SearXNG) request(requestURL string) (ret string, err error) {
 	req, err := http.NewRequest("GET", requestURL, nil)
 	if err != nil {
 		return "", fmt.Errorf("error creating request: %w", err)
@@ -92,7 +92,13 @@ func (sc *Client) request(requestURL string) (ret string, err error) {
 	return output, nil
 }
 
-// Register the tool with Fabric
-func init() {
-	plugins.RegisterTool(NewClient())
+// NormalizeQuery ensures clean query input
+func (s *SearXNG) NormalizeQuery(query string) string {
+	return s.normalizeRegex.ReplaceAllString(query, "_")
+}
+
+// Grab performs a search and formats the result (aligned with YouTube's Grab function)
+func (s *SearXNG) Grab(query string) (ret string, err error) {
+	query = s.NormalizeQuery(query)
+	return s.QuerySearXNG(query)
 }
