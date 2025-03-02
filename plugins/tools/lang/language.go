@@ -1,7 +1,7 @@
 package lang
 
 import (
-	"github.com/danielmiessler/fabric/plugins"
+	"github.com/noelth/fabric/plugins"
 	"golang.org/x/text/language"
 )
 

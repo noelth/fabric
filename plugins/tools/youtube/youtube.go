@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"github.com/anaskhan96/soup"
-	"github.com/danielmiessler/fabric/plugins"
+	"github.com/noelth/fabric/plugins"
 	"google.golang.org/api/option"
 	"google.golang.org/api/youtube/v3"
 )

@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/danielmiessler/fabric/plugins"
+	"github.com/noelth/fabric/plugins"
 )
 
 type Client struct {
