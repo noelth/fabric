@@ -19,7 +19,7 @@ type SearXNGSearchResult struct {
 
 // SearXNGResponse represents the full API response
 type SearXNGResponse struct {
-	Query   string               `json:"query"`
+	Query   string                `json:"query"`
 	Results []SearXNGSearchResult `json:"results"`
 }
 
