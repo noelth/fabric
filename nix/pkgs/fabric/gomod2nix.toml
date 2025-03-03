@@ -55,12 +55,12 @@ schema = 3
   [mod."github.com/cloudwego/base64x"]
     version = "v0.1.5"
     hash = "sha256-MyUYTveN48DhnL8mwAgCRuMExLct98uzSPsmYlfaa4I="
-  [mod."github.com/cloudwego/iasm"]
-    version = "v0.2.0"
-    hash = "sha256-TzIP2N3HOesXrKACsRr/ShcoqttwPGZPckIepsTyHOA="
   [mod."github.com/cyphar/filepath-securejoin"]
     version = "v0.4.1"
     hash = "sha256-NOV6MfbkcQbfhNmfADQw2SJmZ6q1nw0wwg8Pm2tf2DM="
+  [mod."github.com/danielmiessler/fabric"]
+    version = "v1.4.147"
+    hash = "sha256-tD8HNmDPefkUtOYD9ENrKKSODW/bpLM1IpqXwwtmbm4="
   [mod."github.com/davecgh/go-spew"]
     version = "v1.1.1"
     hash = "sha256-nhzSUrE1fCkN0+RL04N4h8jWmRFPPPWbCuDc7Ss0akI="
